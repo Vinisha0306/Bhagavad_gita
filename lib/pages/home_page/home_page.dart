@@ -6,8 +6,6 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BhagavadGita listenable = Provider.of<BhagavadGita>(context);
-    BhagavadGita unlistenable =
-        Provider.of<BhagavadGita>(context, listen: false);
 
     return Scaffold(
       appBar: AppBar(
