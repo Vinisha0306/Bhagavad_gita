@@ -18,51 +18,64 @@ class ChaptersPage extends StatelessWidget {
         title: Text(
             listenable.allData[0]['chapters'][dataindex.toString()]['name']),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          children: [
-            Text(
-              listenable.allData[0]['chapters'][dataindex.toString()]
-                  ['chapter_summary'],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              listenable.allData[0]['verse_hindi'],
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+      body: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("lib/assets/bg2.jpg"),
+                fit: BoxFit.cover,
               ),
             ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: listenable.allData[0]['chapters']
-                    [dataindex.toString()]['verses_count'],
-                itemBuilder: (context, index) => GestureDetector(
-                  onTap: () {
-                    Navigator.of(context)
-                        .pushNamed(AppRoutes.detailspage, arguments: index + 1);
+          ),
+          Padding(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              children: [
+                Text(
+                  listenable.allData[0]['chapters'][dataindex.toString()]
+                      ['chapter_summary'],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  listenable.allData[0]['verse_hindi'],
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: listenable.allData[0]['chapters']
+                        [dataindex.toString()]['verses_count'],
+                    itemBuilder: (context, index) => GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushNamed(AppRoutes.detailspage,
+                            arguments: index + 1);
 
-                    Globals.globals.range =
-                        listenable.allData[0]['verses'][dataindex.toString()];
-                  },
-                  child: Card(
-                    child: Container(
-                      margin: const EdgeInsets.all(10),
-                      alignment: Alignment.center,
-                      child: Text(
-                        listenable.allData[0]['verses'][dataindex.toString()]
-                            [(index + 1).toString()]['text'],
+                        Globals.globals.range = listenable.allData[0]['verses']
+                            [dataindex.toString()];
+                      },
+                      child: Card(
+                        child: Container(
+                          margin: const EdgeInsets.all(10),
+                          alignment: Alignment.center,
+                          child: Text(
+                            listenable.allData[0]['verses']
+                                    [dataindex.toString()]
+                                [(index + 1).toString()]['text'],
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),
-            )
-          ],
-        ),
+                )
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
